@@ -1,29 +1,27 @@
 // app/blog/[slug]/page.tsx
-import Link from 'next/link';
+import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { notFound } from 'next/navigation';
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  // In a real app, you'd use this slug to fetch data from a file or database
-  const { slug } = params;
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post: any) => ({
+    slug: post.slug,
+  }));
+}
+
+export default function PostPage({ params }: { params: { slug: string } }) {
+  const post = getPostBySlug(params.slug);
+
+  if (!post) notFound();
 
   return (
-    <main className="max-w-3xl mx-auto py-20 px-6">
-      <Link href="/" className="text-sm text-blue-600 hover:underline">
-        ← Back to Home
-      </Link>
-      
-      <div className="mt-10">
-        <span className="text-slate-500 text-sm">Post Slug: {slug}</span>
-        <h1 className="text-4xl font-bold mt-2 capitalize">
-          {slug.replace(/-/g, ' ')}
-        </h1>
-        
-        <div className="mt-8 text-slate-700 leading-relaxed">
-          <p>
-            This is a placeholder for your blog content. Next.js is using the 
-            dynamic route <strong>{slug}</strong> to render this page.
-          </p>
-        </div>
+    <article className="max-w-3xl mx-auto py-20 px-6">
+      <h1 className="text-4xl font-bold mb-4">{post.metadata.title}</h1>
+      {/* We will eventually need a markdown renderer here, 
+          but for now, this will show the content is working */}
+      <div className="prose prose-slate mt-8">
+        {post.content}
       </div>
-    </main>
+    </article>
   );
 }

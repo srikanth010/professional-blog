@@ -4,21 +4,30 @@ import matter from 'gray-matter';
 
 const postsDirectory = path.join(process.cwd(), 'content');
 
+// This one already exists
 export function getAllPosts() {
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
+  return fileNames.map((fileName) => {
     const slug = fileName.replace(/\.md$/, '');
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data } = matter(fileContents);
-
-    return {
-      slug,
-      title: data.title,
-      date: data.date,
-      excerpt: data.excerpt,
-    };
+    return { slug, ...data };
   });
+}
 
-  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+// ADD THIS FUNCTION BELOW
+export function getPostBySlug(slug: string) {
+  try {
+    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data, content } = matter(fileContents);
+    
+    return {
+      metadata: data,
+      content: content, // This is the raw markdown string
+    };
+  } catch (e) {
+    return null; // Return null so the page can show a 404
+  }
 }

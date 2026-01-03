@@ -53,6 +53,8 @@ export default function ProfessionalBlog() {
        <span className="font-bold text-xl text-slate-700">WYNDHAM</span>
        <span className="font-bold text-xl text-slate-700">CISCO</span>
        <span className="font-bold text-xl text-slate-700">EAST WEST BANK</span>
+       <span className="font-bold text-xl text-slate-700">MAARK LLC</span>
+       <span className="font-bold text-xl text-slate-700">SKILLVOICE</span>
     </div>
   </div>
 </section>
