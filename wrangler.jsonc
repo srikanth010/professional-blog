@@ -1,6 +1,7 @@
 {
-  "name": "professionalblog",
-  "compatibility_date": "2026-01-03",
-  "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": ".vercel/output/static" 
+  "name": "my-professional-blog",
+  "compatibility_date": "2026-01-01",
+  "assets": {
+    "directory": "./next"
+  }
 }
