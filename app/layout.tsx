@@ -21,7 +21,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth"> {/* Add scroll-smooth here */}
+    <html lang="en" className="scroll-smooth">
       <body className="bg-white">
         <Header />
         {children}
@@ -29,3 +29,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
