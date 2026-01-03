@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',      // This creates a static HTML/CSS/JS bundle
+  output: 'export', 
   images: {
-    unoptimized: true,   // Cloudflare Pages requires this for static exports
+    unoptimized: true, 
   },
 };
 
