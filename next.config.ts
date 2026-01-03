@@ -1,5 +1,9 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // This tells Next.js to generate a static 'out' folder
-  images: { unoptimized: true } // Required for static export
+  output: 'export',      // This creates a static HTML/CSS/JS bundle
+  images: {
+    unoptimized: true,   // Cloudflare Pages requires this for static exports
+  },
 };
+
 export default nextConfig;
