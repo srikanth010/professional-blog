@@ -4,9 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Add this to ensure Tailwind v4 styles are processed correctly
   experimental: {
-    optimizePackageImports: ['lucide-react'],
+    // This disables the experimental Lightning CSS minifier
+    useLightningcss: false, 
   },
 };
 
