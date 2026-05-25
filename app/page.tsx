@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Github, Linkedin, Mail, ArrowRight, ExternalLink, Code2, Globe, Cpu } from 'lucide-react';
 import ContactForm from './components/ContactForm';
+import CareerChat from '@/components/CareerChat';
 
 export default function ProfessionalBlog() {
   return (
@@ -156,6 +157,8 @@ export default function ProfessionalBlog() {
   </div>
 </section>
 
+      {/* Career Chat Widget */}
+      <CareerChat />
     </main>
   );
 }
