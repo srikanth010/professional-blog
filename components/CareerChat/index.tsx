@@ -95,7 +95,7 @@ export default function CareerChat() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-full max-w-md h-96 bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-slate-200">
+        <div className="fixed bottom-6 right-6 w-full max-w-md h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-slate-200">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-2xl">
             <div>
@@ -150,7 +150,7 @@ export default function CareerChat() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => {
+                onKeyDown={(e) => {
                   if (e.key === 'Enter' && !isLoading) {
                     handleSendMessage();
                   }

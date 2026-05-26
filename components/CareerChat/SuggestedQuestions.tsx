@@ -1,8 +1,8 @@
 const SUGGESTED_QUESTIONS = [
   "What are Srikanth's AI/ML skills?",
-  "Tell me about his trading system projects",
-  "Why is he a good fit for Anthropic?",
-  "What leadership experience does he have?",
+  "What makes him a good engineering hire?",
+  "Describe his leadership experience",
+  "What systems has he architected at scale?",
 ];
 
 interface SuggestedQuestionsProps {

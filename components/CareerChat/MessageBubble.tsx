@@ -3,6 +3,40 @@ interface Message {
   content: string;
 }
 
+function renderMarkdownLike(text: string) {
+  return text.split('\n').map((line, lineIndex) => {
+    const isBullet = line.trim().startsWith('- ');
+    const bulletContent = isBullet ? line.trim().slice(2) : line;
+
+    const parts: React.ReactNode[] = [];
+    let lastIndex = 0;
+    const boldRegex = /\*\*([^*]+)\*\*/g;
+    let match;
+
+    while ((match = boldRegex.exec(bulletContent)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(bulletContent.slice(lastIndex, match.index));
+      }
+      parts.push(
+        <strong key={`bold-${match.index}`}>{match[1]}</strong>
+      );
+      lastIndex = boldRegex.lastIndex;
+    }
+
+    if (lastIndex < bulletContent.length) {
+      parts.push(bulletContent.slice(lastIndex));
+    }
+
+    return (
+      <div key={lineIndex} className={isBullet ? 'ml-4 list-disc' : ''}>
+        {isBullet && <span className="mr-2">•</span>}
+        {parts.length > 0 ? parts : bulletContent}
+        {lineIndex < text.split('\n').length - 1 && <div />}
+      </div>
+    );
+  });
+}
+
 export default function MessageBubble({ message }: { message: Message }) {
   const isUser = message.role === 'user';
 
@@ -15,13 +49,12 @@ export default function MessageBubble({ message }: { message: Message }) {
             : 'bg-white text-slate-800 border border-slate-200 rounded-bl-none'
         }`}
       >
-        <div className="whitespace-pre-wrap break-words">
-          {message.content.split('\n').map((line, index) => (
-            <div key={index}>
-              {line}
-              {index < message.content.split('\n').length - 1 && <br />}
-            </div>
-          ))}
+        <div className="break-words">
+          {isUser ? (
+            message.content
+          ) : (
+            renderMarkdownLike(message.content)
+          )}
         </div>
       </div>
     </div>
