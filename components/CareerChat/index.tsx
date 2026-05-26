@@ -73,7 +73,7 @@ export default function CareerChat({ inline }: CareerChatProps) {
 
   const chatBody = (
     <>
-      <div className="relative flex-1 overflow-y-auto px-4 py-5 sm:px-5 space-y-4">
+      <div className="relative flex-1 overflow-y-auto px-4 py-5 sm:px-5 space-y-4 min-h-0">
         <div className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:32px_32px]" />
 
         {messages.length === 0 ? (
@@ -104,10 +104,6 @@ export default function CareerChat({ inline }: CareerChatProps) {
                   </button>
                 ))}
               </div>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-white/[0.035] p-3 backdrop-blur">
-              <SuggestedQuestions onSelect={handleSendMessage} disabled={isLoading} />
             </div>
           </div>
         ) : (

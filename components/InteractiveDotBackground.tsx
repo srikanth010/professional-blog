@@ -37,16 +37,7 @@ export default function InteractiveDotBackground() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     console.log("✅ Background filled");
 
-    // Draw some test dots
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-    for (let x = 50; x < canvas.width; x += 40) {
-      for (let y = 50; y < canvas.height; y += 40) {
-        ctx.beginPath();
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-    console.log("✅ Test dots drawn");
+    console.log("✅ Setup complete, dots will appear on mouse move");
 
     // Animation loop
     let mouseX = -9999;
@@ -56,18 +47,21 @@ export default function InteractiveDotBackground() {
       ctx.fillStyle = "#050509";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      const interactionRadius = 150;
+
       for (let x = 50; x < canvas.width; x += 40) {
         for (let y = 50; y < canvas.height; y += 40) {
           const dx = x - mouseX;
           const dy = y - mouseY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const opacity = Math.max(0.3, 1 - dist / 200);
 
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-          ctx.beginPath();
-          ctx.arc(x, y, 3 + opacity * 2, 0, Math.PI * 2);
-          ctx.fill();
+          if (dist < interactionRadius) {
+            const opacity = Math.max(0.1, 1 - dist / interactionRadius);
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 0.6})`;
+            ctx.beginPath();
+            ctx.arc(x, y, 1.5 + opacity * 1, 0, Math.PI * 2);
+            ctx.fill();
+          }
         }
       }
 
