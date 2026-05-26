@@ -7,19 +7,19 @@ export function Other() {
   const cards = [
     {
       title: "Ask Srikanth",
-      description: "Interactive AI-powered Q&A about my background, skills, and experience",
+      description: "A conversational way to learn more about my work, skills, and what I care about",
       color: "from-violet-500/90 to-fuchsia-500/90",
       icon: "💬",
     },
     {
       title: "Achievements",
-      description: "Leading enterprise migrations, mentoring teams, and delivering high-impact solutions at scale",
+      description: "The kinds of projects, migrations, and team wins I&apos;ve been part of over the years",
       color: "from-amber-500/90 to-orange-500/90",
       icon: "🏆",
     },
     {
       title: "Connect",
-      description: "GitHub, LinkedIn, Email — let's discuss AEM architecture or your next project",
+      description: "GitHub, LinkedIn, Email — if you want to talk AEM, AI, or a project idea, I&apos;m easy to reach",
       color: "from-cyan-500/90 to-blue-500/90",
       icon: "🔗",
     },
@@ -37,10 +37,10 @@ export function Other() {
             className="text-xs font-bold uppercase tracking-widest sm:text-base"
             style={{ color: "var(--accent)" }}
           >
-            Beyond the resume
+            A bit more
           </span>
           <h2 className="mt-2 px-2 text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            More About <span className="text-gradient-shimmer">Me</span>
+            Beyond the <span className="text-gradient-shimmer">resume</span>
           </h2>
         </div>
 
@@ -56,7 +56,7 @@ export function Other() {
               background: `linear-gradient(135deg, ${cards[0].color})`,
             }}
           >
-            <div className="relative p-6 h-full flex flex-col justify-between min-h-[280px]">
+            <div className="relative p-6 h-full flex flex-col justify-between min-h-70">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"
                 style={{ background: "radial-gradient(circle at top right, white)" }}
               />
@@ -84,7 +84,7 @@ export function Other() {
               background: `linear-gradient(135deg, ${cards[1].color})`,
             }}
           >
-            <div className="relative p-6 h-full flex flex-col justify-between min-h-[280px]">
+            <div className="relative p-6 h-full flex flex-col justify-between min-h-70">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"
                 style={{ background: "radial-gradient(circle at top right, white)" }}
               />
@@ -118,7 +118,7 @@ export function Other() {
               background: `linear-gradient(135deg, ${cards[2].color})`,
             }}
           >
-            <div className="relative p-6 h-full flex flex-col justify-between min-h-[280px]">
+            <div className="relative p-6 h-full flex flex-col justify-between min-h-70">
               <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"
                 style={{ background: "radial-gradient(circle at top right, white)" }}
               />

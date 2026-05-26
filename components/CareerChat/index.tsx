@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Loader2, X, Sparkles, MessageCircle } from 'lucide-react';
 import MessageBubble from './MessageBubble';
-import SuggestedQuestions from './SuggestedQuestions';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -29,11 +28,16 @@ export default function CareerChat({ inline }: CareerChatProps) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const apiUrl = process.env.NEXT_PUBLIC_CAREER_API_URL || 'http://localhost:8000';
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    // Keep auto-scroll constrained to the chat panel; avoid scrolling the whole page.
+    container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
   }, [messages]);
 
   const handleSendMessage = async (messageText: string = input) => {
@@ -73,9 +77,11 @@ export default function CareerChat({ inline }: CareerChatProps) {
 
   const chatBody = (
     <>
-      <div className="relative flex-1 overflow-y-auto px-4 py-5 sm:px-5 space-y-4 min-h-0">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:32px_32px]" />
-
+      <div
+        ref={messagesContainerRef}
+        className="relative flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-5 sm:px-5 space-y-4"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         {messages.length === 0 ? (
           <div className="relative h-full min-h-[285px] flex flex-col justify-between gap-8">
             <div className="space-y-6 pt-3">
@@ -126,7 +132,7 @@ export default function CareerChat({ inline }: CareerChatProps) {
         )}
       </div>
 
-      <div className="border-t border-white/10 p-3 sm:p-4">
+      <div className="shrink-0 border-t border-white/10 p-3 sm:p-4">
         <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.055] p-1.5 backdrop-blur">
           <input
             type="text"
@@ -158,14 +164,16 @@ export default function CareerChat({ inline }: CareerChatProps) {
         <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-28 left-8 h-56 w-56 rounded-full bg-white/5 blur-3xl" />
 
-        <div className="relative flex flex-col" style={{ minHeight: '520px' }}>
-          <header className="flex items-center justify-between border-b border-white/10 px-5 py-4 sm:px-6">      
+        <div className="relative flex min-h-0 flex-col" style={{ height: '520px' }}>
+          <header className="shrink-0 flex items-center justify-between border-b border-white/10 px-5 py-4 sm:px-6">
             <span className="hidden rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-white/45 sm:inline-flex">
               Portfolio AI
             </span>
           </header>
 
-          {chatBody}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+            {chatBody}
+          </div>
         </div>
       </section>
     );
@@ -184,8 +192,8 @@ export default function CareerChat({ inline }: CareerChatProps) {
       )}
 
       {isOpen && (
-        <div className="fixed inset-x-4 bottom-4 z-50 mx-auto flex h-[560px] max-w-md flex-col overflow-hidden rounded-[2rem] border text-white sm:inset-x-auto sm:right-6 sm:mx-0" style={glassStyle}>
-          <header className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+        <div className="fixed inset-x-4 bottom-4 z-50 mx-auto flex h-[560px] max-w-xl flex-col overflow-hidden rounded-[2rem] border text-white sm:inset-x-auto sm:right-6 sm:mx-0" style={glassStyle}>
+          <header className="shrink-0 flex items-center justify-between border-b border-white/10 px-5 py-4">
             <div className="flex items-center gap-3">
               <div className="grid h-10 w-10 place-items-center rounded-2xl border border-white/10 bg-white/[0.06] text-xs font-semibold">
                 SK
@@ -207,7 +215,9 @@ export default function CareerChat({ inline }: CareerChatProps) {
             </button>
           </header>
 
-          {chatBody}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+            {chatBody}
+          </div>
         </div>
       )}
     </>

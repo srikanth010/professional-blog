@@ -5,14 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
 const TILE_IMAGES = {
-  aem: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
-  work: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop",
-  location:
-    "https://images.unsplash.com/photo-1502175353174-a7a70e73b362?q=80&w=1200&auto=format&fit=crop",
-  mindset:
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop",
-  default:
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+  aem: "/assets/wyndham.png",
+  work: "/assets/maark.png",
+  location: "/assets/ewb.png",
+  mindset: "/assets/cisco.png",
+  default: "/assets/skillvoice.png",
 } as const;
 
 type TileKey = keyof typeof TILE_IMAGES;
@@ -37,7 +34,7 @@ export function About() {
     >
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold sm:text-5xl md:text-6xl">
-          About <span className="text-gradient-shimmer">Me</span>
+          A little <span className="text-gradient-shimmer">about me</span>
         </h2>
       </div>
 
@@ -54,7 +51,7 @@ export function About() {
             Srikanth Kanteti
           </h3>
           <p className="mt-1 text-xs" style={{ color: "var(--muted)" }}>
-            Sr. AEM Tech Lead
+            Sr. AEM Tech Lead • builder at heart
           </p>
         </article>
 
@@ -63,10 +60,10 @@ export function About() {
           style={{ borderColor: "var(--card-border)" }}>
           <Image
             src={TILE_IMAGES.default}
-            alt="Developer workspace"
+            alt="Portfolio project logo"
             width={600}
             height={600}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain bg-transparent p-0"
           />
         </article>
 
@@ -86,7 +83,7 @@ export function About() {
               className="mt-2 text-[10px] uppercase tracking-[0.18em]"
               style={{ color: "var(--muted)" }}
             >
-              Sr. AEM Tech Lead
+              Sr. AEM Tech Lead • builder at heart
             </p>
           </div>
         </article>
@@ -105,10 +102,10 @@ export function About() {
             className="mt-2 text-xs leading-relaxed sm:text-sm"
             style={{ color: "var(--muted)" }}
           >
-            AEM as a Cloud Service expert — MSM/Live Copy for 50+ locales,
-            Dispatcher TTL optimization, OSGi configurations, and secure
-            authoring permission models for distributed global teams at Wyndham
-            Hotels.
+            I&apos;ve spent a good part of my career shaping AEM as a Cloud Service
+            platforms, from MSM and Live Copy across 50+ locales to Dispatcher
+            caching, OSGi services, and authoring setups that are easier for
+            global teams to work with.
           </p>
         </article>
 
@@ -119,17 +116,17 @@ export function About() {
           className={`${tileBase} col-span-1 row-span-2 md:col-start-3 md:row-start-2`}
           style={tileBg}
         >
-          <h3 className="text-sm font-bold">Craft</h3>
+          <h3 className="text-sm font-bold">AI Delivery</h3>
           <p
             className="mt-2 text-xs leading-relaxed sm:text-sm"
             style={{ color: "var(--muted)" }}
           >
-            Building headless CMS architectures with Content Fragments and
-            GraphQL, integrated with React/Next.js frontends. Shipping quality
-            through Cloud Manager pipelines and automated testing.
+            I like building practical tools around React, Next.js, and GraphQL,
+            especially when they help content teams move faster. I&apos;m also
+            exploring how LLMs and MCP can fit naturally into real workflows.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            {["AEM", "React", "TypeScript", "Java", "GraphQL", "Jenkins"].map(
+            {["AEM", "React", "TypeScript", "GraphQL", "LLMs", "MCP"].map(
               (t) => (
                 <span
                   key={t}
@@ -150,22 +147,18 @@ export function About() {
         <article
           onMouseEnter={() => setActiveTile("location")}
           onMouseLeave={() => setActiveTile(null)}
-          className="col-span-1 row-span-1 h-full min-h-[9rem] rounded-2xl border overflow-hidden relative transition-all duration-200 hover:border-violet-400/40"
+          className="col-span-1 row-span-1 h-full min-h-36 rounded-2xl border overflow-hidden relative transition-all duration-200 hover:border-violet-400/40"
           style={{ borderColor: "var(--card-border)" }}
         >
-          <Image
-            src={TILE_IMAGES.location}
-            alt="United States"
-            fill
-            className="object-cover opacity-60"
-            sizes="(max-width: 768px) 50vw, 33vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full p-3">
-            <p className="text-xl font-bold leading-none">United States</p>
-            <p className="text-[11px]" style={{ color: "var(--muted)" }}>
-              EST / CST
-            </p>
+          <div className="flex h-full items-center justify-center bg-white/5 p-4">
+            <Image
+              src={TILE_IMAGES.location}
+              alt="East West Bank"
+              width={240}
+              height={140}
+              className="h-auto w-full max-w-55 object-contain"
+              sizes="(max-width: 768px) 50vw, 33vw"
+            />
           </div>
         </article>
 
@@ -181,17 +174,18 @@ export function About() {
             className="mt-2 text-xs leading-relaxed sm:text-sm"
             style={{ color: "var(--muted)" }}
           >
-            Ownership, consistency, and pragmatic architecture over trend-chasing.
-            Leading migrations from AEM 6.4/6.5 to AEMaaCS with zero-downtime
-            strategies and 90+ Lighthouse scores.
+            I value steady delivery, clear decisions, and architecture that
+            holds up in the real world. Most of my work has been about moving
+            teams from older AEM setups to AEMaaCS without making life harder
+            for editors or engineers.
           </p>
-          <div className="mt-4 overflow-hidden rounded-xl border border-white/10">
+          <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5 p-4">
             <Image
               src={TILE_IMAGES.mindset}
-              alt="Engineering mindset"
+              alt="Cisco"
               width={700}
               height={900}
-              className="h-40 w-full object-cover"
+              className="h-32 w-full object-contain"
             />
           </div>
         </article>
@@ -212,9 +206,9 @@ export function About() {
             >
               <Image
                 src={currentImage}
-                alt="Context visual"
+                alt="Professional reference visual"
                 fill
-                className="object-cover"
+                className="object-contain bg-transparent p-0"
                 sizes="(min-width: 768px) 33vw"
                 priority
               />

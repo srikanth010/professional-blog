@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="section relative flex min-h-[100svh] items-center overflow-hidden pb-32 pt-24 sm:pt-32"
+      className="section relative flex min-h-svh items-center overflow-hidden pb-32 pt-24 sm:pt-32"
     >
       {/* Background blur blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -25,22 +25,21 @@ export function Hero() {
           transition={{ duration: 0.6 }}
         >
             <p className="text-xs uppercase tracking-[0.25em] text-violet-300 sm:text-sm">
-              Sr. AEM Tech Lead
+              Sr. AEM Developer & Tech Lead
             </p>
             <h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl">
-              Architecting{" "}
-              <span className="text-gradient-shimmer">Enterprise</span>
+              Building content platforms{" "}
+              <span className="text-gradient-shimmer">teams trust</span>
               <br />
-              Digital Experiences.
+              and users actually enjoy.
             </h1>
             <p
               className="max-w-2xl text-base sm:text-lg"
               style={{ color: "var(--muted)" }}
             >
-              I&apos;m Srikanth Kanteti — Senior AEM Developer and Tech Lead
-              with 7+ years delivering high-scale content platforms for Global
-              500 companies. I specialize in modernizing legacy CMS ecosystems
-              into high-performance, headless architectures.
+              I&apos;m Srikanth Kanteti. I&apos;ve spent 7+ years helping Global 500
+              companies modernize legacy CMS setups into faster, cleaner AEM
+              and headless experiences.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -103,7 +102,7 @@ export function Hero() {
             className="mb-4 text-xs font-bold uppercase tracking-widest"
             style={{ color: "var(--muted)" }}
           >
-            Trusted at scale by
+            Worked with teams at
           </p>
           <div className="flex flex-wrap gap-x-8 gap-y-3 opacity-40 hover:opacity-70 transition-opacity">
             {[
