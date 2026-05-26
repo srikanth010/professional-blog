@@ -1,46 +1,73 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Mail } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
+const navItems = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },
+  { href: "#contact", label: "Contact" },
+];
 
-  // Monitor scroll position to change header style
+export default function Navbar() {
+  const [active, setActive] = useState("home");
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    const ids = navItems.map((item) => item.href.replace("#", ""));
+    const onScroll = () => {
+      let current = ids[0];
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const el = document.getElementById(ids[i]);
+        if (el && el.getBoundingClientRect().top <= 130) {
+          current = ids[i];
+          break;
+        }
+      }
+      setActive(current);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/80 backdrop-blur-md border-b border-slate-100 py-3 shadow-sm' 
-        : 'bg-transparent py-6'
-    }`}>
-      <div className="max-w-4xl mx-auto px-6 flex justify-between items-center">
-        <Link href="/" className="group">
-          <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition">
-            Srikanth<span className="text-blue-600">.</span>
-          </span>
-        </Link>
-
-        <nav className="flex items-center gap-6">
-          <Link href="#experience" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition">
-            Experience
-          </Link>
-          <Link 
-            href="#contact" 
-            className="flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-600 transition shadow-md"
-          >
-            <Mail size={16} /> Hire Me
-          </Link>
-        </nav>
-      </div>
+    <header className="fixed top-0 left-0 right-0 z-50 py-6">
+      <nav className="section">
+        <div
+          className="mx-auto flex h-14 max-w-fit items-center gap-1 rounded-full glass-strong px-6 shadow-xl shadow-black/30"
+        >
+          {navItems.map((item) => {
+            const id = item.href.replace("#", "");
+            const isActive = active === id;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className="relative rounded-full px-4 py-2.5 text-sm font-semibold transition-colors"
+                style={{
+                  color: isActive ? "var(--foreground)" : "var(--muted)",
+                }}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-active-indicator"
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: "var(--accent)",
+                      opacity: 0.12,
+                      border: "1px solid var(--accent)",
+                    }}
+                    transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </a>
+            );
+          })}
+        </div>
+      </nav>
     </header>
   );
 }

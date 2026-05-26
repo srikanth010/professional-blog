@@ -44,10 +44,13 @@ export default function MessageBubble({ message }: { message: Message }) {
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div
         className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg text-sm leading-relaxed ${
-          isUser
-            ? 'bg-blue-600 text-white rounded-br-none'
-            : 'bg-white text-slate-800 border border-slate-200 rounded-bl-none'
+          isUser ? "rounded-br-none" : "rounded-bl-none border"
         }`}
+        style={{
+          background: isUser ? "var(--accent)" : "var(--card)",
+          color: isUser ? "white" : "var(--foreground)",
+          borderColor: isUser ? undefined : "var(--card-border)",
+        }}
       >
         <div className="break-words">
           {isUser ? (

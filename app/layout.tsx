@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from './components/Header';
+import InteractiveDotBackground from "@/components/InteractiveDotBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,20 +13,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// app/layout.tsx
-export const metadata = {
-  title: 'Srikanth Kanteti | Sr. AEM Tech Lead',
-  description: '7+ years of experience in enterprise content management and systems architecture.',
-}
+export const metadata: Metadata = {
+  title: "Srikanth Kanteti | Sr. AEM Tech Lead",
+  description:
+    "7+ years architecting enterprise AEM platforms for Global 500 companies. Sr. AEM Tech Lead specializing in headless CMS, AEMaaCS migrations, and scalable digital experiences.",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="bg-white">
-        <Header />
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+    >
+      <body style={{ fontFamily: "var(--font-sans)" }}>
+        <InteractiveDotBackground />
         {children}
       </body>
     </html>
   );
 }
-
