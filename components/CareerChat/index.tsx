@@ -9,13 +9,6 @@ interface Message {
   content: string;
 }
 
-interface ChatResponse {
-  response: string;
-  tools_used: string[];
-  iterations: number;
-  response_time_ms: number;
-}
-
 interface CareerChatProps {
   /** Embed directly in a section (no floating button) */
   inline?: boolean;
@@ -28,9 +21,15 @@ export default function CareerChat({ inline }: CareerChatProps) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [streamingContent, setStreamingContent] = useState('');
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const sessionIdRef = useRef<string>(
+    typeof crypto !== 'undefined' ? crypto.randomUUID() : Math.random().toString(36)
+  );
+  const wsRef = useRef<WebSocket | null>(null);
   const apiUrl = process.env.NEXT_PUBLIC_CAREER_API_URL || 'http://localhost:8000';
+  const wsUrl = apiUrl.replace(/^https/, 'wss').replace(/^http/, 'ws') + '/career/ws';
 
   useEffect(() => {
     const container = messagesContainerRef.current;
@@ -38,34 +37,105 @@ export default function CareerChat({ inline }: CareerChatProps) {
 
     // Keep auto-scroll constrained to the chat panel; avoid scrolling the whole page.
     container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, streamingContent]);
 
-  const handleSendMessage = async (messageText: string = input) => {
+  useEffect(() => {
+    return () => {
+      wsRef.current?.close();
+    };
+  }, []);
+
+  const handleSendMessage = (messageText: string = input) => {
     if (!messageText.trim() || isLoading) return;
 
     const userMessage = messageText.trim();
     setInput('');
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
+    setStreamingContent('');
 
-    try {
-      const response = await fetch(`${apiUrl}/career/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
-      });
-
-      if (!response.ok) throw new Error(`API error: ${response.status}`);
-
-      const data: ChatResponse = await response.json();
-      setMessages((prev) => [...prev, { role: 'assistant', content: data.response }]);
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Failed to get response. Please try again.';
-      setMessages((prev) => [...prev, { role: 'assistant', content: `Error: ${errorMessage}` }]);
-    } finally {
-      setIsLoading(false);
+    // Open or reuse WebSocket connection
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
+      wsRef.current = new WebSocket(wsUrl);
     }
+    const ws = wsRef.current;
+
+    let accumulated = '';
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.token) {
+        accumulated += data.token;
+        setStreamingContent(accumulated);
+        setIsLoading(false); // Hide spinner once first token arrives
+      } else if (data.done) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: accumulated }]);
+        setStreamingContent('');
+        setIsLoading(false);
+      } else if (data.error) {
+        setMessages((prev) => [...prev, { role: 'assistant', content: `Error: ${data.error}` }]);
+        setStreamingContent('');
+        setIsLoading(false);
+      }
+    };
+
+    ws.onerror = () => {
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: 'Connection error. Please try again.' },
+      ]);
+      setStreamingContent('');
+      setIsLoading(false);
+    };
+
+    const send = () =>
+      ws.send(
+        JSON.stringify({
+          message: userMessage,
+          session_id: sessionIdRef.current,
+        })
+      );
+
+    if (ws.readyState === WebSocket.OPEN) {
+      send();
+    } else {
+      ws.onopen = send;
+    }
+  };
+
+  const renderMarkdownLike = (text: string) => {
+    return text.split('\n').map((line, lineIndex) => {
+      const isBullet = line.trim().startsWith('- ');
+      const bulletContent = isBullet ? line.trim().slice(2) : line;
+
+      const parts: React.ReactNode[] = [];
+      let lastIndex = 0;
+      const boldRegex = /\*\*([^*]+)\*\*/g;
+      let match;
+
+      while ((match = boldRegex.exec(bulletContent)) !== null) {
+        if (match.index > lastIndex) {
+          parts.push(bulletContent.slice(lastIndex, match.index));
+        }
+        parts.push(
+          <strong key={`bold-${match.index}`}>{match[1]}</strong>
+        );
+        lastIndex = boldRegex.lastIndex;
+      }
+
+      if (lastIndex < bulletContent.length) {
+        parts.push(bulletContent.slice(lastIndex));
+      }
+
+      return (
+        <div key={lineIndex} className={isBullet ? 'ml-4 list-disc' : ''}>
+          {isBullet && <span className="mr-2">•</span>}
+          {parts.length > 0 ? parts : bulletContent}
+          {lineIndex < text.split('\n').length - 1 && <div />}
+        </div>
+      );
+    });
   };
 
   const glassStyle = {
@@ -117,13 +187,23 @@ export default function CareerChat({ inline }: CareerChatProps) {
             {messages.map((msg, i) => (
               <MessageBubble key={`${msg.role}-${i}`} message={msg} />
             ))}
-            {isLoading && (
+            {(isLoading || streamingContent) && (
               <div className="flex justify-start">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 backdrop-blur">
-                  <div className="flex items-center gap-2">
-                    <Loader2 size={14} className="animate-spin text-white/70" />
-                    <span className="text-sm text-white/55">Thinking…</span>
-                  </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 backdrop-blur max-w-lg lg:max-w-3xl">
+                  {streamingContent ? (
+                    <div
+                      className="text-sm leading-relaxed break-words"
+                      style={{ color: 'var(--foreground)' }}
+                    >
+                      {renderMarkdownLike(streamingContent)}
+                      <span className="inline-block w-1 h-4 ml-0.5 bg-white/50 animate-pulse" />
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Loader2 size={14} className="animate-spin text-white/70" />
+                      <span className="text-sm text-white/55">Thinking…</span>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
