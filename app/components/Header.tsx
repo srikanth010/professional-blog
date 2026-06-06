@@ -45,7 +45,7 @@ export default function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                className="relative rounded-full px-4 py-2.5 text-sm font-semibold transition-colors"
+                className="relative rounded-full px-4 py-2.5 text-sm font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{
                   color: isActive ? "var(--foreground)" : "var(--muted)",
                 }}

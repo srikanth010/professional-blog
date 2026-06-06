@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 const TILE_IMAGES = {
   aem: "/assets/wyndham.png",
@@ -25,6 +27,7 @@ const tileBg = {
 export function About() {
   const [activeTile, setActiveTile] = useState<TileKey | null>(null);
   const currentImage = activeTile ? TILE_IMAGES[activeTile] : TILE_IMAGES.default;
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
@@ -34,7 +37,7 @@ export function About() {
     >
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold sm:text-5xl md:text-6xl">
-          A little <span className="text-gradient-shimmer">about me</span>
+          A little <span className="accent-text">about me</span>
         </h2>
       </div>
 
@@ -56,14 +59,14 @@ export function About() {
         </article>
 
         {/* Mobile center image */}
-        <article className="md:hidden aspect-square overflow-hidden rounded-2xl border"
-          style={{ borderColor: "var(--card-border)" }}>
+        <article className="md:hidden aspect-square overflow-hidden rounded-2xl border flex items-center justify-center"
+          style={{ borderColor: "var(--card-border)", backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
           <Image
             src={TILE_IMAGES.default}
             alt="Portfolio project logo"
             width={600}
             height={600}
-            className="h-full w-full object-contain bg-transparent p-0"
+            className="h-auto w-auto max-h-full max-w-full object-contain p-4"
           />
         </article>
 
@@ -92,7 +95,17 @@ export function About() {
         <article
           onMouseEnter={() => setActiveTile("aem")}
           onMouseLeave={() => setActiveTile(null)}
-          className={`${tileBase} col-span-2 row-span-1`}
+          onFocus={() => setActiveTile("aem")}
+          onBlur={() => setActiveTile(null)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setActiveTile(activeTile === "aem" ? null : "aem");
+            }
+          }}
+          tabIndex={0}
+          role="button"
+          className={`${tileBase} col-span-2 row-span-1 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
           style={tileBg}
         >
           <h3 className="text-sm font-bold uppercase" style={{ color: "var(--foreground)" }}>
@@ -113,7 +126,17 @@ export function About() {
         <article
           onMouseEnter={() => setActiveTile("work")}
           onMouseLeave={() => setActiveTile(null)}
-          className={`${tileBase} col-span-1 row-span-2 md:col-start-3 md:row-start-2`}
+          onFocus={() => setActiveTile("work")}
+          onBlur={() => setActiveTile(null)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setActiveTile(activeTile === "work" ? null : "work");
+            }
+          }}
+          tabIndex={0}
+          role="button"
+          className={`${tileBase} col-span-1 row-span-2 md:col-start-3 md:row-start-2 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
           style={tileBg}
         >
           <h3 className="text-sm font-bold">AI Delivery</h3>
@@ -147,10 +170,20 @@ export function About() {
         <article
           onMouseEnter={() => setActiveTile("location")}
           onMouseLeave={() => setActiveTile(null)}
-          className="col-span-1 row-span-1 h-full min-h-36 rounded-2xl border overflow-hidden relative transition-all duration-200 hover:border-violet-400/40"
+          onFocus={() => setActiveTile("location")}
+          onBlur={() => setActiveTile(null)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setActiveTile(activeTile === "location" ? null : "location");
+            }
+          }}
+          tabIndex={0}
+          role="button"
+          className="col-span-1 row-span-1 h-full min-h-36 rounded-2xl border overflow-hidden relative transition-all duration-200 hover:border-violet-400/40 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           style={{ borderColor: "var(--card-border)" }}
         >
-          <div className="flex h-full items-center justify-center bg-white/5 p-4">
+          <div className="flex h-full items-center justify-center p-4" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
             <Image
               src={TILE_IMAGES.location}
               alt="East West Bank"
@@ -166,7 +199,17 @@ export function About() {
         <article
           onMouseEnter={() => setActiveTile("mindset")}
           onMouseLeave={() => setActiveTile(null)}
-          className={`${tileBase} col-span-1 row-span-2 md:col-start-1 md:row-start-2`}
+          onFocus={() => setActiveTile("mindset")}
+          onBlur={() => setActiveTile(null)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setActiveTile(activeTile === "mindset" ? null : "mindset");
+            }
+          }}
+          tabIndex={0}
+          role="button"
+          className={`${tileBase} col-span-1 row-span-2 md:col-start-1 md:row-start-2 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
           style={tileBg}
         >
           <h3 className="text-sm font-bold">Mindset</h3>
@@ -179,7 +222,7 @@ export function About() {
             teams from older AEM setups to AEMaaCS without making life harder
             for editors or engineers.
           </p>
-          <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white/5 p-4">
+          <div className="mt-4 overflow-hidden rounded-xl border border-white/10 p-4 flex items-center justify-center" style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
             <Image
               src={TILE_IMAGES.mindset}
               alt="Cisco"
@@ -192,8 +235,8 @@ export function About() {
 
         {/* Animated center image — desktop only */}
         <article
-          className="hidden md:block aspect-square col-start-2 row-start-2 rounded-2xl border overflow-hidden relative"
-          style={{ borderColor: "var(--card-border)" }}
+          className="hidden md:block aspect-square col-start-2 row-start-2 rounded-2xl border overflow-hidden relative flex items-center justify-center"
+          style={{ borderColor: "var(--card-border)", backgroundColor: "rgba(0, 0, 0, 0.3)" }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -201,14 +244,18 @@ export function About() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.28, ease: "easeOut" }}
-              className="absolute inset-0"
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.28,
+                ease: "easeOut"
+              }}
+              className="absolute inset-0 flex items-center justify-center p-4"
             >
               <Image
                 src={currentImage}
                 alt="Professional reference visual"
-                fill
-                className="object-contain bg-transparent p-0"
+                width={400}
+                height={400}
+                className="h-auto w-auto max-h-full max-w-full object-contain"
                 sizes="(min-width: 768px) 33vw"
                 priority
               />

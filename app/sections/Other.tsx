@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import CareerChat from "../../components/CareerChat";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 export function Other() {
   const cards = [
@@ -25,6 +26,8 @@ export function Other() {
     },
   ];
 
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section
       id="other"
@@ -40,16 +43,20 @@ export function Other() {
             A bit more
           </span>
           <h2 className="mt-2 px-2 text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Beyond the <span className="text-gradient-shimmer">resume</span>
+            Beyond the <span className="accent-text">resume</span>
           </h2>
         </div>
 
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
           {/* Chat Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0,
+              ease: "easeOut"
+            }}
             viewport={{ once: true }}
             className="group rounded-3xl overflow-hidden transition-all duration-200 hover:scale-105"
             style={{
@@ -75,9 +82,13 @@ export function Other() {
 
           {/* Achievements Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.1,
+              ease: "easeOut"
+            }}
             viewport={{ once: true }}
             className="group rounded-3xl overflow-hidden transition-all duration-200 hover:scale-105"
             style={{
@@ -109,9 +120,13 @@ export function Other() {
 
           {/* Connect Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.2,
+              ease: "easeOut"
+            }}
             viewport={{ once: true }}
             className="group rounded-3xl overflow-hidden transition-all duration-200 hover:scale-105"
             style={{

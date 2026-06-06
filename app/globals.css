@@ -90,30 +90,8 @@ a {
 }
 
 /* Gradient text utilities */
-.gradient-text {
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@keyframes shimmer-gradient {
-  0% {
-    background-position: 100% 0, 0 0;
-  }
-  100% {
-    background-position: -100% 0, 0 0;
-  }
-}
-
-.text-gradient-shimmer {
-  background-image: linear-gradient(110deg, transparent 45%, #ffffffb3 50%, transparent 55%), linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 100%, 100% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: 3s linear infinite shimmer-gradient;
-  display: inline-block;
+.accent-text {
+  color: var(--accent);
 }
 
 /* Blog article prose overrides for dark theme */
@@ -148,4 +126,34 @@ a {
 
 .prose hr {
   border-color: var(--card-border);
+}
+
+/* Focus visible styles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+/* Motion variables */
+:root {
+  --motion-duration: 0.3s;
+  --motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Preferred reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

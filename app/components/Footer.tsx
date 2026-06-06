@@ -18,7 +18,7 @@ export function Footer() {
             className="flex items-center gap-3 text-base"
             style={{ color: "var(--muted)" }}
           >
-            <span className="text-lg font-bold gradient-text">SK</span>
+            <span className="text-lg font-bold accent-text">SK</span>
             <span>•</span>
             <span>© {year} Srikanth Kanteti</span>
           </div>
@@ -46,14 +46,8 @@ export function Footer() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="transition-colors duration-200 hover:scale-110"
+                className="transition-colors duration-200 hover:scale-110 hover:text-accent focus-visible:text-accent focus-visible:outline-none"
                 style={{ color: "var(--muted)" }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--accent)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--muted)")
-                }
                 aria-label={label}
               >
                 <Icon size={22} />

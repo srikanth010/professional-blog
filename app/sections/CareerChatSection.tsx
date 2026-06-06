@@ -2,16 +2,21 @@
 
 import { motion } from "framer-motion";
 import CareerChat from "../../components/CareerChat";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 export function CareerChatSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section id="chat" className="pt-24 sm:pt-32 pb-16">
       <div className="section">
         <motion.div
-          
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{
+            duration: prefersReducedMotion ? 0 : 0.6,
+            ease: "easeOut"
+          }}
         >
           {/* Avatar Section */}
           <div className="text-center mb-8">
@@ -35,7 +40,7 @@ export function CareerChatSection() {
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: "var(--foreground)" }}>
               Ask About{" "}
-              <span className="text-gradient-shimmer">Srikanth</span>
+              <span className="accent-text">Srikanth</span>
             </h2>
           </div>
 

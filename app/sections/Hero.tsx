@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 export function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section
       id="home"
@@ -20,16 +23,19 @@ export function Hero() {
         {/* Hero text content */}
         <motion.div
           className="space-y-6"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{
+            duration: prefersReducedMotion ? 0 : 0.6,
+            ease: "easeOut"
+          }}
         >
             <p className="text-xs uppercase tracking-[0.25em] text-violet-300 sm:text-sm">
               Sr. AEM Developer & Tech Lead
             </p>
             <h1 className="max-w-3xl text-4xl font-bold leading-tight sm:text-6xl lg:text-7xl">
               Building content platforms{" "}
-              <span className="text-gradient-shimmer">teams trust</span>
+              <span className="accent-text">teams trust</span>
               <br />
               and users actually enjoy.
             </h1>

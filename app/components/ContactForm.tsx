@@ -80,70 +80,70 @@ export default function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex flex-col gap-2">
               <label
+                htmlFor="name"
                 className="text-sm font-semibold ml-1"
-                style={{ color: "var(--muted)" }}
+                style={{ color: "var(--foreground)" }}
               >
                 Full Name
               </label>
               <input
+                id="name"
                 type="text"
                 name="name"
                 required
                 placeholder="Adobe Expert"
-                className="px-4 py-3 rounded-xl border outline-none transition-all"
+                className="px-4 py-3 rounded-xl border outline-none transition-all focus-visible:ring-2 focus-visible:ring-accent"
                 style={{
                   borderColor: "var(--card-border)",
                   background: "var(--card)",
                   color: "var(--foreground)",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
               />
             </div>
             <div className="flex flex-col gap-2">
               <label
+                htmlFor="email"
                 className="text-sm font-semibold ml-1"
-                style={{ color: "var(--muted)" }}
+                style={{ color: "var(--foreground)" }}
               >
                 Email Address
               </label>
               <input
+                id="email"
                 type="email"
                 name="email"
                 required
                 placeholder="expert@aem.com"
-                className="px-4 py-3 rounded-xl border outline-none transition-all"
+                className="px-4 py-3 rounded-xl border outline-none transition-all focus-visible:ring-2 focus-visible:ring-accent"
                 style={{
                   borderColor: "var(--card-border)",
                   background: "var(--card)",
                   color: "var(--foreground)",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-                onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
               />
             </div>
           </div>
 
           <div className="flex flex-col gap-2">
             <label
+              htmlFor="message"
               className="text-sm font-semibold ml-1"
-              style={{ color: "var(--muted)" }}
+              style={{ color: "var(--foreground)" }}
             >
               Message
             </label>
             <textarea
+              id="message"
               name="message"
               required
               rows={5}
               placeholder="How can I help with your AEM architecture or project?"
-              className="px-4 py-3 rounded-xl border outline-none transition-all"
+              className="px-4 py-3 rounded-xl border outline-none transition-all focus-visible:ring-2 focus-visible:ring-accent"
               style={{
                 borderColor: "var(--card-border)",
                 background: "var(--card)",
                 color: "var(--foreground)",
               }}
-              onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
-              onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
             ></textarea>
           </div>
 

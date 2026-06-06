@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import ContactForm from "../components/ContactForm";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 export function Contact() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section
       id="contact"
@@ -12,9 +15,12 @@ export function Contact() {
     >
       <div className="section">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{
+            duration: prefersReducedMotion ? 0 : 0.5,
+            ease: "easeOut"
+          }}
           viewport={{ once: true }}
           className="mb-14 text-center"
         >
@@ -26,7 +32,7 @@ export function Contact() {
           </span>
           <h2 className="mt-2 px-2 text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             Let&apos;s Build Something{" "}
-            <span className="text-gradient-shimmer">Exceptional</span>
+            <span className="accent-text">Exceptional</span>
           </h2>
           <p
             className="mx-auto mt-4 max-w-2xl px-3 text-base sm:text-lg"

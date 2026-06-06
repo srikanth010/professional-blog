@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 import {
   SiReact,
   SiTypescript,
@@ -68,6 +69,8 @@ const skillGroups = [
 ];
 
 export function Skills() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section
       id="skills"
@@ -83,7 +86,7 @@ export function Skills() {
             Tech stack
           </span>
           <h2 className="mt-2 px-2 text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Skills <span className="text-gradient-shimmer">Overview</span>
+            Skills <span className="accent-text">Overview</span>
           </h2>
         </div>
 

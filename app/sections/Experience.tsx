@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 const experiences = [
   {
@@ -47,6 +48,8 @@ const experiences = [
 ];
 
 export function Experience() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section
       id="experience"
@@ -62,7 +65,7 @@ export function Experience() {
             Career history
           </span>
           <h2 className="mt-2 px-2 text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Work <span className="text-gradient-shimmer">Experience</span>
+            Work <span className="accent-text">Experience</span>
           </h2>
         </div>
 
@@ -70,10 +73,14 @@ export function Experience() {
           {experiences.map((exp, index) => (
             <motion.article
               key={exp.company}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.5,
+                delay: prefersReducedMotion ? 0 : index * 0.08,
+                ease: "easeOut"
+              }}
               className="group rounded-2xl border p-6 transition-all duration-200 hover:border-violet-400/40"
               style={{
                 borderColor: "var(--card-border)",
