@@ -1,0 +1,36 @@
+[     481ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     517ms] [LOG] [HMR] connected @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     618ms] [LOG] ✅ Canvas element found: JSHandle@node @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     618ms] [LOG] ✅ Canvas context obtained @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     618ms] [LOG] ✅ Canvas resized to 1200x790 @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     618ms] [LOG] ✅ Background filled @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     618ms] [LOG] ✅ Setup complete, dots will appear on mouse move @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     619ms] [LOG] ✅ Animation loop started @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[     924ms] [WARNING] Image with src "http://localhost:3737/assets/ewb.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio. @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   11864ms] [LOG] ✅ Canvas resized to 1200x790 @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   26588ms] [LOG] ✅ Canvas resized to 1200x790 @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   40277ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   40298ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   40778ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
+[   41782ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
+[   42785ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
+[   43790ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
+[   44794ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
+[   45729ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   45759ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   47330ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   47478ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   48228ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   48696ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   49798ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
+[   50210ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   50676ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   51010ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/maark.png:0
+[   51476ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/maark.png:0
+[   52743ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   53211ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   53528ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   53551ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   54244ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/cisco.png:0
+[   54393ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/assets/skillvoice.png:0
+[   54802ms] [ERROR] WebSocket connection to 'ws://localhost:3737/_next/webpack-hmr?id=qZyct6BleQHH3bYy5b_kj' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3737/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10876
