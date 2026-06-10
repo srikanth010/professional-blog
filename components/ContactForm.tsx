@@ -16,9 +16,12 @@ export default function ContactForm() {
     const formData = new FormData(event.target);
 
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
-    if (accessKey) {
-      formData.append("access_key", accessKey);
+    if (!accessKey) {
+      setStatus("error");
+      setMessage("Contact form is not configured. Please email me directly.");
+      return;
     }
+    formData.append("access_key", accessKey);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {

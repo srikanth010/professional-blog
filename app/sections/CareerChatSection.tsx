@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import CareerChat from "../../components/CareerChat";
+import CareerChat from "@/components/CareerChat";
 import { useReducedMotion } from "@/app/hooks/useReducedMotion";
 
 export function CareerChatSection() {
